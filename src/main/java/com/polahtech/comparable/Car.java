@@ -45,4 +45,9 @@ public class Car implements Comparable<Car> {
     public int hashCode() {
         return Objects.hash(getColor(), getBrand(), getSpeed());
     }
+
+    @Override
+    public String toString() {
+        return "{ Brand: " + this.brand + ", Color: " + this.color + ", Speed: " + this.speed + " }";
+    }
 }
