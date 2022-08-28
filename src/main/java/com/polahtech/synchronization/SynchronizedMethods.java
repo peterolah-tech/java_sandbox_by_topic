@@ -2,17 +2,28 @@ package com.polahtech.synchronization;
 
 public class SynchronizedMethods {
 
-    private int sum;
+    private int sumNonSync;
+    private int sumSync;
+
 
     public SynchronizedMethods() {
-        this.sum = 0;
+        this.sumNonSync = 0;
+        this.sumSync = 0;
+        }
+
+    public void increaseSumNonSync(int increment) {
+        this.sumNonSync += increment;
     }
 
-    public void increaseSum(int increment) {
-        this.sum += increment;
+    public synchronized void increaseSumSync(int increment) {
+        this.sumSync += increment;
     }
 
-    public int getSum() {
-        return sum;
+    public int getSumNonSync() {
+        return sumNonSync;
+    }
+
+    public int getSumSync() {
+        return sumSync;
     }
 }
