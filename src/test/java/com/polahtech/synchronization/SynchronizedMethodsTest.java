@@ -42,4 +42,15 @@ class SynchronizedMethodsTest {
         assertEquals(((increaseUntil - increaseFrom) * increment), synchronizedMethods.getSumSync());
     }
 
+    @Test
+    void testMultiThreadedEnvironmentSyncWithBlock() throws InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        SynchronizedMethods synchronizedMethods = new SynchronizedMethods();
+
+        IntStream.range(increaseFrom, increaseUntil)
+                .forEach(count -> executorService.submit(() -> synchronizedMethods.increaseSumSyncBlock(increment)));
+        executorService.awaitTermination(executorServiceTimeoutInMs, TimeUnit.MILLISECONDS);
+
+        assertEquals(((increaseUntil - increaseFrom) * increment), synchronizedMethods.getSumSyncForBlock());
+    }
 }
